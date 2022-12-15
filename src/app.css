@@ -1,0 +1,12 @@
+body {
+  --slack-color: #362360;
+  --thread-highlight: #aa578c;
+  --border-color: #181818;
+  --online-color: #12e212;
+  overflow: hidden;
+}
+
+.app_body {
+  display: flex;
+  height: 100vh;
+}
