@@ -3,21 +3,32 @@ import { Avatar } from '@mui/material';
 import React from 'react';
 import './header.css';
 import { useStateValue } from '../../StateProvider';
-import { getAuth, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase';
+import { actionTypes } from '../../reducer';
 
 export default function Header() {
 
   const [{ user }] = useStateValue();
+  const [state, dispatch] = useStateValue();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      navigate('/');
-    }).catch((error) => {
-      // An error happened.
-    });
+  const handleLogout = async () => {
+    try {
+      await signOut(auth)
+        .then(() => {
+          dispatch({
+            type: actionTypes.SET_USER,
+            user: null,
+          })
+          navigate('/login')
+        }).catch((error) => {
+          alert(error.message);
+        });
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 
   return (
