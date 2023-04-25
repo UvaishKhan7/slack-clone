@@ -46,7 +46,7 @@ export default function Chat() {
       </div>
       <div className="chat_message">
         {roomMessages?.map(({ message, timestamp, roomId, user, userimage }) => (
-          <Message message={message} key={roomId} timestamp={timestamp} user={user} userimage={userimage} />
+          <Message message={message} key={message} timestamp={timestamp} user={user} userimage={userimage} />
         ))}
       </div>
       <ChatInput channelName={roomDetails?.name} channelId={roomId} />

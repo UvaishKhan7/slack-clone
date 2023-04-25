@@ -21,6 +21,7 @@ export default function ChatInput({ channelName, channelId }) {
                 userimage: user.photoURL,
             })
         }
+        setInput('')
     };
 
     return (

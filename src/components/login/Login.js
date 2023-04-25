@@ -2,7 +2,7 @@ import React from 'react';
 import './login.css';
 import Slack from '../assets/Slack.svg';
 import { Button } from '@mui/material';
-import { signInWithPopup } from 'firebase/auth';
+import { browserLocalPersistence, setPersistence, signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../firebase';
 import { useStateValue } from '../../StateProvider';
 import { actionTypes } from '../../reducer';
@@ -11,7 +11,8 @@ export default function Login() {
 
     const [state, dispatch] = useStateValue();
 
-    const signIn = () => {
+    const signIn = async () => {
+        await setPersistence(auth, browserLocalPersistence)
         signInWithPopup(auth, provider)
             .then((result) => {
                 dispatch({
